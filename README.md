@@ -40,8 +40,6 @@ The goal of the project is to create a clean, premium, client-friendly online pr
 ```bash
 sufyans-portfolio/
 ├── index.html
-├── style.css
-├── script.js
 ├── README.md
 ├── images/
 │   ├── clients/
@@ -56,6 +54,9 @@ sufyans-portfolio/
     └── videos/
         ├── testimonial.mp4
         └── testimonial-poster.jpg
+    |___ files/
+        |__ script.js
+        |__ style.css
 ```
 
 ## Main Sections
@@ -144,3 +145,4 @@ You can update the phone number, email address, social links, and booking messag
 ---
 
 Built for a premium barber brand presentation with a clean and practical client experience.
+
