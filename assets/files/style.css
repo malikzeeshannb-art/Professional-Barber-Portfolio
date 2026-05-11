@@ -2219,7 +2219,7 @@ i.fab {
     }
 }
 /* ============================================
-   MOBILE NAV DRAWER GLASS EFFECT
+   MOBILE NAV DRAWER FIX
 ============================================ */
 header {
   position: relative;
@@ -2274,9 +2274,7 @@ header {
 .mobile-menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.55);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -2303,20 +2301,17 @@ body.menu-lock {
     right: -100%;
     width: min(82vw, 320px);
     height: 100vh;
-    padding: 76px 22px 24px;
+    padding: 72px 22px 24px;
     margin: 0;
+    background: #111;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 18px;
-    background: rgba(20, 20, 24, 0.42);
-    backdrop-filter: blur(22px) saturate(170%);
-    -webkit-backdrop-filter: blur(22px) saturate(170%);
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.38);
     z-index: 1200;
     transition: right 0.3s ease;
     overflow-y: auto;
+    box-shadow: -12px 0 30px rgba(0, 0, 0, 0.35);
   }
 
   .nav-list.mobile-open {
