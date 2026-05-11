@@ -567,15 +567,22 @@ You can enter the roll number and student name on the official website to confir
             <p class="video-testimonial-subtitle">See what our satisfied clients have to say about their experience</p>
             
             <div class="video-testimonial-wrapper">
-                <video 
-                    class="testimonial-video"
-                    controls
-                    preload="metadata"
-                    poster="assets/videos/testimonial-poster.jpg">
-                    <source src="assets/videos/testimonial.mp4" type="video/mp4">
-                    <source src="assets/videos/testimonial.webm" type="video/webm">
-                    Your browser does not support the video tag. Please update your browser.
-                </video>
+               <video 
+    class="testimonial-video"
+    controls
+    preload="metadata"
+    poster="assets/videos/testimonial-poster.jpg">
+    <source src="assets/videos/testimonial.mp4" type="video/mp4">
+    <source src="assets/videos/testimonial.webm" type="video/webm">
+    <track
+      kind="subtitles"
+      srclang="en"
+      label="English captions"
+      src="assets/videos/testimonial-en.vtt"
+      default
+    />
+    Your browser does not support the video tag. Please update your browser.
+</video>
             </div>
         </div>
         </section>
