@@ -8,126 +8,124 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeAllFeatures();
-    fixHeroButtonsSize();
 });
 
 /* ============================================
    1. MOBILE NAVIGATION TOGGLE
-   ============================================ */
+============================================ */
 function initializeMobileNavigation() {
-    const header = document.querySelector('header');
-    const headerContainer = document.querySelector('.header-container');
-    const navList = document.querySelector('.nav-list');
+  const header = document.querySelector('header');
+  const headerContainer = document.querySelector('.header-container');
+  const navList = document.querySelector('.nav-list');
 
-    if (!header || !headerContainer || !navList) return;
+  if (!header || !headerContainer || !navList) return;
 
-    let overlay = document.querySelector('.mobile-menu-overlay');
+  let overlay = document.querySelector('.mobile-menu-overlay');
 
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'mobile-menu-overlay';
-        header.appendChild(overlay);
-    }
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'mobile-menu-overlay';
+    header.appendChild(overlay);
+  }
 
-    const closeMobileMenu = () => {
-        navList.classList.remove('mobile-open');
+  const closeMobileMenu = () => {
+    navList.classList.remove('mobile-open');
 
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (toggle) toggle.classList.remove('active');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    if (toggle) toggle.classList.remove('active');
 
-        overlay.classList.remove('is-visible');
-        document.body.classList.remove('menu-lock');
-        document.body.style.overflow = '';
-    };
+    overlay.classList.remove('is-visible');
+    document.body.classList.remove('menu-lock');
+    document.body.style.overflow = '';
+  };
 
-    const openMobileMenu = () => {
-        navList.classList.add('mobile-open');
+  const openMobileMenu = () => {
+    navList.classList.add('mobile-open');
 
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (toggle) toggle.classList.add('active');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    if (toggle) toggle.classList.add('active');
 
-        overlay.classList.add('is-visible');
-        document.body.classList.add('menu-lock');
-        document.body.style.overflow = 'hidden';
-    };
+    overlay.classList.add('is-visible');
+    document.body.classList.add('menu-lock');
+    document.body.style.overflow = 'hidden';
+  };
 
-    const ensureCloseButton = () => {
-        if (navList.querySelector('.mobile-menu-close')) return;
+  const ensureCloseButton = () => {
+    if (navList.querySelector('.mobile-menu-close')) return;
 
-        const closeBtn = document.createElement('button');
-        closeBtn.type = 'button';
-        closeBtn.className = 'mobile-menu-close';
-        closeBtn.setAttribute('aria-label', 'Close navigation menu');
-        closeBtn.innerHTML = '&times;';
-        closeBtn.addEventListener('click', closeMobileMenu);
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'mobile-menu-close';
+    closeBtn.setAttribute('aria-label', 'Close navigation menu');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', closeMobileMenu);
 
-        navList.prepend(closeBtn);
-    };
+    navList.prepend(closeBtn);
+  };
 
-    const createMobileMenuButton = () => {
-        if (document.querySelector('.mobile-menu-toggle')) return;
+  const createMobileMenuButton = () => {
+    if (document.querySelector('.mobile-menu-toggle')) return;
 
-        const toggle = document.createElement('button');
-        toggle.type = 'button';
-        toggle.className = 'mobile-menu-toggle';
-        toggle.setAttribute('aria-label', 'Toggle navigation menu');
-        toggle.innerHTML = '<span></span><span></span><span></span>';
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'mobile-menu-toggle';
+    toggle.setAttribute('aria-label', 'Toggle navigation menu');
+    toggle.innerHTML = '<span></span><span></span><span></span>';
 
-        headerContainer.appendChild(toggle);
+    headerContainer.appendChild(toggle);
 
-        toggle.addEventListener('click', function () {
-            if (navList.classList.contains('mobile-open')) {
-                closeMobileMenu();
-            } else {
-                ensureCloseButton();
-                openMobileMenu();
-            }
-        });
-    };
-
-    const removeMobileMenuButton = () => {
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (toggle) toggle.remove();
-
-        const closeBtn = navList.querySelector('.mobile-menu-close');
-        if (closeBtn) closeBtn.remove();
-    };
-
-    if (window.innerWidth <= 768) {
-        createMobileMenuButton();
-        ensureCloseButton();
-    } else {
-        removeMobileMenuButton();
+    toggle.addEventListener('click', function () {
+      if (navList.classList.contains('mobile-open')) {
         closeMobileMenu();
+      } else {
+        ensureCloseButton();
+        openMobileMenu();
+      }
+    });
+  };
+
+  const removeMobileMenuButton = () => {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    if (toggle) toggle.remove();
+
+    const closeBtn = navList.querySelector('.mobile-menu-close');
+    if (closeBtn) closeBtn.remove();
+  };
+
+  if (window.innerWidth <= 768) {
+    createMobileMenuButton();
+    ensureCloseButton();
+  } else {
+    removeMobileMenuButton();
+    closeMobileMenu();
+  }
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth <= 768) {
+      createMobileMenuButton();
+    } else {
+      removeMobileMenuButton();
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    const navLink = e.target.closest('.nav-link');
+    if (navLink && navList.classList.contains('mobile-open')) {
+      closeMobileMenu();
     }
 
-    window.addEventListener('resize', function () {
-        if (window.innerWidth <= 768) {
-            createMobileMenuButton();
-        } else {
-            removeMobileMenuButton();
-            closeMobileMenu();
-        }
-    });
+    if (e.target === overlay && navList.classList.contains('mobile-open')) {
+      closeMobileMenu();
+    }
+  });
 
-    document.addEventListener('click', function (e) {
-        const navLink = e.target.closest('.nav-link');
-        if (navLink && navList.classList.contains('mobile-open')) {
-            closeMobileMenu();
-        }
-
-        if (e.target === overlay && navList.classList.contains('mobile-open')) {
-            closeMobileMenu();
-        }
-    });
-
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && navList.classList.contains('mobile-open')) {
-            closeMobileMenu();
-        }
-    });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && navList.classList.contains('mobile-open')) {
+      closeMobileMenu();
+    }
+  });
 }
-
 /* ============================================
    2. STICKY HEADER BEHAVIOR
    ============================================ */
@@ -246,6 +244,7 @@ function initializeScrollReveal() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                // Optionally stop observing after visible
                 observer.unobserve(entry.target);
             }
         });
@@ -412,7 +411,6 @@ function initializeFloatingWhatsAppButton() {
         }
     });
 }
-
 /* ============================================
    10. WHATSAPP BOOKING INTEGRATION
    ============================================ */
@@ -446,7 +444,125 @@ function initializeWhatsAppButtons() {
 }
 
 /* ============================================
-   11. EVENT TRACKING UTILITY
+   11. HERO PORTRAIT IMAGE LAZY LOADING
+   ============================================ */
+
+function initializeHeroPortrait() {
+    const heroPortrait = document.querySelector('.hero-portrait');
+
+    if (!heroPortrait) return;
+
+    // Add loading state
+    heroPortrait.style.opacity = '0.8';
+
+    // Once image loads, remove loading state
+    heroPortrait.addEventListener('load', function() {
+        this.style.opacity = '1';
+        this.style.transition = 'opacity 0.5s ease';
+    });
+
+    // Handle image load error
+    heroPortrait.addEventListener('error', function() {
+        console.warn('Hero portrait image failed to load');
+    });
+}
+
+/* ============================================
+   12. FONT AWESOME ICON INITIALIZATION
+   ============================================ */
+
+function initializeIcons() {
+    // Ensure Font Awesome icons are properly loaded
+    if (window.FontAwesome && window.FontAwesome.config) {
+        window.FontAwesome.config.autoReplaceSvg = 'nest';
+    }
+}
+
+/* ============================================
+   13. ENHANCED WHATSAPP INTEGRATION
+   ============================================ */
+
+function enhanceWhatsAppIntegration() {
+    const phoneNumber = '923430105129';
+    const message = encodeURIComponent(
+        "Hi, I'd like to book an appointment. Please share available time slots."
+    );
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    // Update all WhatsApp links
+    const whatsappLinks = document.querySelectorAll('[href*="wa.me"]');
+
+    whatsappLinks.forEach(link => {
+        link.setAttribute('href', whatsappUrl);
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+
+        // Add click tracking
+        link.addEventListener('click', function() {
+            trackEvent('whatsapp_link_click', {
+                button_text: this.textContent.trim(),
+                button_class: this.className,
+                timestamp: new Date()
+            });
+        });
+    });
+}
+
+/* ============================================
+   14. MOBILE KEYBOARD ADJUSTMENT
+   ============================================ */
+
+function adjustFloatingButtonForMobileKeyboard() {
+    const floatingContainer = document.querySelector('.floating-whatsapp-container');
+
+    if (!floatingContainer) return;
+
+    // Handle mobile keyboard visibility
+    let originalBottom = 30;
+
+    window.addEventListener('focus', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            floatingContainer.style.position = 'absolute';
+            floatingContainer.style.bottom = 'auto';
+            floatingContainer.style.top = '20px';
+        }
+    }, true);
+
+    window.addEventListener('blur', function() {
+        floatingContainer.style.position = 'fixed';
+        floatingContainer.style.top = 'auto';
+        floatingContainer.style.bottom = originalBottom + 'px';
+    }, true);
+}
+
+/* ============================================
+   15. RESPONSIVE LAYOUT ADJUSTMENTS
+   ============================================ */
+
+function handleResponsiveAdjustments() {
+    const hero = document.querySelector('.hero-content');
+    const heroPortrait = document.querySelector('.hero-portrait');
+
+    if (!hero || !heroPortrait) return;
+
+    function adjustLayout() {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth < 1024) {
+            // Tablet and mobile adjustments
+            hero.style.gridTemplateColumns = '1fr';
+        } else {
+            // Desktop layout
+            hero.style.gridTemplateColumns = '1fr 1fr';
+        }
+    }
+
+    adjustLayout();
+    window.addEventListener('resize', adjustLayout);
+}
+
+/* ============================================
+   16. EVENT TRACKING UTILITY
    ============================================ */
 
 function trackEvent(eventName, eventData = {}) {
@@ -465,7 +581,47 @@ function trackEvent(eventName, eventData = {}) {
 }
 
 /* ============================================
-   12. HERO BUTTONS - PREVENT RESIZING
+   17. PERFORMANCE OPTIMIZATION - PREVENT MULTIPLE INITIALIZATIONS
+   ============================================ */
+
+let featuresInitialized = false;
+
+function initializeAllFeatures() {
+    if (featuresInitialized) return;
+
+    initializeMobileNavigation();
+    initializeStickyHeader();
+    initializeActiveNavHighlight();
+    initializeScrollReveal();
+    initializeFAQAccordion();
+    initializeWhatsAppButtons();
+    initializeTypewriter();
+    initializeSocialLinks();
+    initializeFloatingWhatsAppButton();  // ← Make sure this is here
+    // ... other functions ...
+}
+/* ============================================
+   18. ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+// Add keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    // ESC key to close mobile menu
+    if (e.key === 'Escape') {
+        const navList = document.querySelector('.nav-list');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        if (navList && navList.classList.contains('mobile-open')) {
+            navList.classList.remove('mobile-open');
+            if (toggle) {
+                toggle.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+    }
+});
+
+/* ============================================
+   FIX: HERO BUTTONS - PREVENT RESIZING
    ============================================ */
 
 function fixHeroButtonsSize() {
@@ -479,33 +635,15 @@ function fixHeroButtonsSize() {
     });
 }
 
+// Call on load
+document.addEventListener('DOMContentLoaded', function() {
+    fixHeroButtonsSize();
+});
+
 // Re-apply on resize
 window.addEventListener('resize', function() {
     fixHeroButtonsSize();
 });
-
-/* ============================================
-   13. PERFORMANCE OPTIMIZATION - PREVENT MULTIPLE INITIALIZATIONS
-   ============================================ */
-
-let featuresInitialized = false;
-
-function initializeAllFeatures() {
-    if (featuresInitialized) return;
-    
-    featuresInitialized = true;
-
-    initializeMobileNavigation();
-    initializeStickyHeader();
-    initializeActiveNavHighlight();
-    initializeScrollReveal();
-    initializeFAQAccordion();
-    initializeWhatsAppButtons();
-    initializeTypewriter();
-    initializeSocialLinks();
-    initializeFloatingWhatsAppButton();
-}
-
 /* ============================================
    END OF SCRIPT
    ============================================ */
