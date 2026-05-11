@@ -2196,3 +2196,122 @@ i.fab {
         gap: var(--spacing-md);
     }
 }
+
+/* ============================================
+   MOBILE NAV DRAWER FIX
+============================================ */
+header {
+  position: relative;
+  z-index: 1000;
+  overflow: visible;
+}
+
+.header-container {
+  position: relative;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1301;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1100;
+}
+
+.mobile-menu-overlay.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.menu-lock {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-list {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(82vw, 320px);
+    height: 100vh;
+    padding: 72px 22px 24px;
+    margin: 0;
+    background: #111;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 18px;
+    z-index: 1200;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    box-shadow: -12px 0 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .nav-list.mobile-open {
+    right: 0;
+  }
+
+  .mobile-menu-close {
+    display: flex;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 1201;
+  }
+}
