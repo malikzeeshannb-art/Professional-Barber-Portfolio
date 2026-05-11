@@ -600,25 +600,6 @@ function initializeAllFeatures() {
     initializeFloatingWhatsAppButton();  // ← Make sure this is here
     // ... other functions ...
 }
-/* ============================================
-   18. ACCESSIBILITY ENHANCEMENTS
-   ============================================ */
-
-// Add keyboard navigation support
-document.addEventListener('keydown', function(e) {
-    // ESC key to close mobile menu
-    if (e.key === 'Escape') {
-        const navList = document.querySelector('.nav-list');
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (navList && navList.classList.contains('mobile-open')) {
-            navList.classList.remove('mobile-open');
-            if (toggle) {
-                toggle.classList.remove('active');
-            }
-            document.body.style.overflow = '';
-        }
-    }
-});
 
 /* ============================================
    FIX: HERO BUTTONS - PREVENT RESIZING
