@@ -12,90 +12,120 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ============================================
    1. MOBILE NAVIGATION TOGGLE
-   ============================================ */
-
+============================================ */
 function initializeMobileNavigation() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navList = document.querySelector('.nav-list');
+  const header = document.querySelector('header');
+  const headerContainer = document.querySelector('.header-container');
+  const navList = document.querySelector('.nav-list');
 
-    // Create hamburger menu button if on mobile
-    if (window.innerWidth <= 768) {
-        createMobileMenuButton();
-    }
+  if (!header || !headerContainer || !navList) return;
 
-    // Listen for window resize to handle responsive behavior
-    window.addEventListener('resize', function() {
-        const currentWidth = window.innerWidth;
-        if (currentWidth > 768) {
-            // Show nav on desktop
-            if (navList) {
-                navList.classList.remove('mobile-open');
-                navList.style.display = '';
-            }
-            removeMobileMenuButton();
-        } else {
-            // Prepare for mobile
-            if (!document.querySelector('.mobile-menu-toggle')) {
-                createMobileMenuButton();
-            }
-        }
-    });
-}
+  let overlay = document.querySelector('.mobile-menu-overlay');
 
-function createMobileMenuButton() {
-    const header = document.querySelector('header');
-    const existingToggle = document.querySelector('.mobile-menu-toggle');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'mobile-menu-overlay';
+    header.appendChild(overlay);
+  }
 
-    if (existingToggle || !header) return;
+  const closeMobileMenu = () => {
+    navList.classList.remove('mobile-open');
+
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    if (toggle) toggle.classList.remove('active');
+
+    overlay.classList.remove('is-visible');
+    document.body.classList.remove('menu-lock');
+    document.body.style.overflow = '';
+  };
+
+  const openMobileMenu = () => {
+    navList.classList.add('mobile-open');
+
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    if (toggle) toggle.classList.add('active');
+
+    overlay.classList.add('is-visible');
+    document.body.classList.add('menu-lock');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const ensureCloseButton = () => {
+    if (navList.querySelector('.mobile-menu-close')) return;
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'mobile-menu-close';
+    closeBtn.setAttribute('aria-label', 'Close navigation menu');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', closeMobileMenu);
+
+    navList.prepend(closeBtn);
+  };
+
+  const createMobileMenuButton = () => {
+    if (document.querySelector('.mobile-menu-toggle')) return;
 
     const toggle = document.createElement('button');
+    toggle.type = 'button';
     toggle.className = 'mobile-menu-toggle';
     toggle.setAttribute('aria-label', 'Toggle navigation menu');
     toggle.innerHTML = '<span></span><span></span><span></span>';
 
-    header.appendChild(toggle);
+    headerContainer.appendChild(toggle);
 
-    toggle.addEventListener('click', function() {
-        const navList = document.querySelector('.nav-list');
-        const body = document.body;
-
-        if (navList) {
-            navList.classList.toggle('mobile-open');
-            this.classList.toggle('active');
-
-            // Prevent body scroll when menu is open
-            if (navList.classList.contains('mobile-open')) {
-                body.style.overflow = 'hidden';
-            } else {
-                body.style.overflow = '';
-            }
-        }
+    toggle.addEventListener('click', function () {
+      if (navList.classList.contains('mobile-open')) {
+        closeMobileMenu();
+      } else {
+        ensureCloseButton();
+        openMobileMenu();
+      }
     });
-}
+  };
 
-function removeMobileMenuButton() {
+  const removeMobileMenuButton = () => {
     const toggle = document.querySelector('.mobile-menu-toggle');
-    if (toggle) {
-        toggle.remove();
-    }
-}
+    if (toggle) toggle.remove();
 
-// Close mobile menu when a nav link is clicked
-document.addEventListener('click', function(e) {
+    const closeBtn = navList.querySelector('.mobile-menu-close');
+    if (closeBtn) closeBtn.remove();
+  };
+
+  if (window.innerWidth <= 768) {
+    createMobileMenuButton();
+    ensureCloseButton();
+  } else {
+    removeMobileMenuButton();
+    closeMobileMenu();
+  }
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth <= 768) {
+      createMobileMenuButton();
+    } else {
+      removeMobileMenuButton();
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
     const navLink = e.target.closest('.nav-link');
-    if (navLink) {
-        const navList = document.querySelector('.nav-list');
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (navList && navList.classList.contains('mobile-open')) {
-            navList.classList.remove('mobile-open');
-            if (toggle) {
-                toggle.classList.remove('active');
-            }
-            document.body.style.overflow = '';
-        }
+    if (navLink && navList.classList.contains('mobile-open')) {
+      closeMobileMenu();
     }
-});
 
+    if (e.target === overlay && navList.classList.contains('mobile-open')) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && navList.classList.contains('mobile-open')) {
+      closeMobileMenu();
+    }
+  });
+}
 /* ============================================
    2. STICKY HEADER BEHAVIOR
    ============================================ */
