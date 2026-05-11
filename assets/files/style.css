@@ -2108,6 +2108,28 @@ header.scrolled {
 }
 
 /* ============================================
+   SEO CONTENT SECTION
+   ============================================ */
+
+#seo-content {
+    background-color: var(--primary-black);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.03) 0%, transparent 100%);
+}
+
+.seo-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.seo-content-wrapper p {
+    font-size: var(--font-size-lg);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+}
+
+/* ============================================
    SCROLL ANIMATIONS & POLISH
    ============================================ */
 
@@ -2196,7 +2218,6 @@ i.fab {
         gap: var(--spacing-md);
     }
 }
-
 /* ============================================
    MOBILE NAV DRAWER GLASS EFFECT
 ============================================ */
