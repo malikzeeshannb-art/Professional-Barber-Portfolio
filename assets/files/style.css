@@ -1336,7 +1336,7 @@ header {
 }
 
 .faq-item {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     background-color: var(--dark-gray);
     border: 1px solid rgba(212, 175, 55, 0.15);
     border-radius: var(--border-radius-md);
@@ -1606,7 +1606,8 @@ footer {
 .footer-nav h3,
 .footer-contact h3 {
     color: var(--accent-gold);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
     font-size: var(--font-size-lg);
 }
 
@@ -1897,29 +1898,20 @@ header.scrolled {
         padding-bottom: var(--spacing-lg);
     }
 
-    .footer-links {
-        grid-template-columns: 1fr;
-    }
+   
 
     .social-links {
         justify-content: center;
     }
 
     .footer-social {
-        grid-column: auto;
-        border-top: none;
-        padding-top: 0;
+        text-align: center;
+        padding-top: var(--spacing-md);
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
     }
 
     .social-links-footer {
-        flex-direction: column;
-        gap: var(--spacing-md);
-    }
-
-    .social-link {
-        width: 100%;
-        justify-content: center;
-        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
     }
 
     section {
