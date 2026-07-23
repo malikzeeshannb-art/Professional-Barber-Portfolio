@@ -1607,7 +1607,7 @@ footer {
 .footer-contact h3 {
     color: var(--accent-gold);
     margin-bottom: var(--spacing-lg);
-    text-align: center;
+        text-align: center;
     font-size: var(--font-size-lg);
 }
 
