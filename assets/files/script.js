@@ -586,6 +586,45 @@ function trackEvent(eventName, eventData = {}) {
 
 let featuresInitialized = false;
 
+function initializeCvModal() {
+    const trigger = document.querySelector('.cv-trigger-btn');
+    const modal = document.getElementById('cvModal');
+
+    if (!trigger || !modal) return;
+
+    const openModal = () => {
+        modal.classList.add('is-open');
+        modal.removeAttribute('hidden');
+        document.body.classList.add('menu-lock');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('hidden', 'true');
+        document.body.classList.remove('menu-lock');
+        document.body.style.overflow = '';
+    };
+
+    trigger.addEventListener('click', openModal);
+
+    modal.querySelectorAll('[data-close-modal]').forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+}
+
 function initializeAllFeatures() {
     if (featuresInitialized) return;
 
@@ -597,8 +636,8 @@ function initializeAllFeatures() {
     initializeWhatsAppButtons();
     initializeTypewriter();
     initializeSocialLinks();
-    initializeFloatingWhatsAppButton();  // ← Make sure this is here
-    // ... other functions ...
+    initializeFloatingWhatsAppButton();
+    initializeCvModal();
 }
 /* ============================================
    18. ACCESSIBILITY ENHANCEMENTS
