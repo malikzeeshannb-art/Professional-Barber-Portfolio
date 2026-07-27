@@ -1,1 +1,482 @@
-<!doctype html><html><body><h1>Malik Sufyan CV</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sufyan Hafeez CV</title>
+  <style>
+    :root {
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #dbe3ea;
+      --soft: #f7f9fc;
+      --accent: #0f4c81;
+      --accent-2: #165d9c;
+      --card: #ffffff;
+      --shadow: 0 12px 30px rgba(15, 76, 129, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 100%);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      padding: 28px 16px;
+    }
+
+    .cv {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      color: white;
+      padding: 28px 28px 22px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .photo-wrap {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: 0.3px;
+    }
+
+    .title .role {
+      margin-top: 8px;
+      font-size: 16px;
+      opacity: 0.95;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .title .status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      font-size: 13px;
+      color: gold;
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 24px 28px 30px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 18px;
+      padding: 18px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .contact-item {
+      font-size: 14px;
+    }
+
+    .label {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .contact-item a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent-2);
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent-2);
+      border-bottom-style: solid;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 17px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-left: 5px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    p { margin: 0 0 10px; }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li { margin: 7px 0; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .experience-item + .experience-item {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .job-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.social .icon {
+  font-size: 16px;
+}
+
+/* Platform Colors */
+.tiktok {
+  background: #000000;
+}
+
+.instagram {
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+
+.whatsapp {
+  background: #25D366;
+}
+
+.linkedin {
+  background: #0A66C2;
+}
+
+.facebook {
+  background: #1877F2;
+}
+    .pill-list li {
+      margin: 0;
+      padding: 9px 12px;
+      border: 1px solid #cfe0ee;
+      border-radius: 999px;
+      background: #1877F2;
+      font-size: 13px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .topbar { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .contact-grid, .two-col { grid-template-columns: 1fr; }
+      .content { padding: 18px; }
+      .topbar { padding: 22px 18px; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .cv { box-shadow: none; border-radius: 0; border: none; }
+      .topbar { break-inside: avoid; }
+      .section, .box { break-inside: avoid; }
+      .footer-note { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="cv">
+    <header class="topbar">
+      <div class="photo-wrap" aria-label="Profile photo placeholder">
+        <!-- Replace the src with Sufyan's image later -->
+        <img src="images/sufiyan-cv-img-.JPG" alt="Sufyan Hafeez profile photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+      
+      </div>
+      <div class="title">
+        <h1>Sufyan Hafeez</h1>
+        <div class="role">Professional Barber / Hair Stylist</div>
+        <div class="status">Available for Global Job Opportunity</div>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="contact-grid">
+        <div class="contact-item"><span class="label">Age:</span> 19</div>
+        <div class="contact-item"><span class="label">Location:</span> <a href="https://www.google.com/maps/search/?api=1&query=Chakwal%2C%20Pakistan" target="_blank" rel="noopener">Chakwal, Pakistan 📍</a></div>
+        <div class="contact-item"><span class="label">Phone / WhatsApp:</span> <a href="https://wa.me/923145715533" target="_blank" rel="noopener">+92 314 5715533</a></div>
+        <div class="contact-item"><span class="label">Email:</span> <a href="mailto:malikmsufiyan53@gmail.com">malikmsufiyan53@gmail.com</a></div>
+        <div class="contact-item"><span class="label">CNIC:</span> 37201-7633573-3</div>
+        <div class="contact-item"><span class="label">Portfolio:</span> <a href="https://malikzeeshannb-art.github.io/Professional-Barber-Portfolio/" target="_blank" rel="noopener">View My Portfolio ↗</a></div>
+      </div>
+<div class="section">
+  <div class="box">
+    <h2 class="section-title">Social Presence</h2>
+
+    <div class="social-links">
+      
+      <a href="#" target="_blank" class="social tiktok">
+        <span class="icon">🎵</span>
+        <span>TikTok</span>
+      </a>
+
+      <a href="#" target="_blank" class="social linkedin">
+        <span class="icon">in</span>
+        <span>LinkedIn</span>
+      </a>
+
+      <a href="https://wa.me/923145715533" target="_blank" class="social whatsapp">
+        <span class="icon">💬</span>
+        <span>WhatsApp</span>
+      </a>
+
+      <a href="#" target="_blank" class="social facebook">
+        <span class="icon">📘</span>
+        <span>Facebook</span>
+      </a>
+
+    </div>
+  </div>
+</div>
+      <div class="section two-col">
+        <div class="box">
+          <h2 class="section-title">Professional Summary</h2>
+          <p>
+            Dedicated and hardworking barber with 4+ years of hands-on salon experience in hair cutting,
+            beard styling, shaving, and client service. Strong in customer handling, grooming standards,
+            hygiene, and fast, accurate service delivery. Trained through a recognized 6-month certificate
+            course at IVT Institute Islamabad, G9 Markaz, and ready to contribute professionally in a modern salon environment.
+          </p>
+          <p>
+            Communicates confidently with clients, understands customer preferences, and can work in basic to advanced English.
+          </p>
+        </div>
+
+        <div class="box">
+          <h2 class="section-title">Languages</h2>
+          <ul>
+            <li>English — Basic to Intermediate</li>
+            <li>Urdu — Fluent</li>
+            <li>Punjabi — Fluent</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="box">
+          <h2 class="section-title">Core Skills</h2>
+          <ul class="pill-list">
+            <li>Men’s Hair Cutting</li>
+            <li>Modern & Classic Styling</li>
+            <li>Beard Shaping</li>
+            <li>Shaving & Trimming</li>
+            <li>Facial Grooming</li>
+            <li>Salon Hygiene</li>
+            <li>Tool Cleaning & Care</li>
+            <li>Client Consultation</li>
+            <li>Customer Handling</li>
+            <li>Fast & Precise Work</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section two-col">
+        <div class="box">
+          <h2 class="section-title">Certification</h2>
+          <div class="experience-item">
+            <div class="job-title">
+              <span>6-Month Barber Certificate</span>
+              <span class="subtle">IVT Institute Islamabad</span>
+            </div>
+            <div class="subtle">G9 Markaz, Islamabad — Government-recognized training</div>
+            <p>
+              Completed a 6-month practical and theoretical barbering course focused on haircutting,
+              grooming techniques, salon professionalism, hygiene, and customer service.
+            </p>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2 class="section-title">Key Strengths</h2>
+          <ul>
+            <li>Good experience in handling clients professionally</li>
+            <li>Strong attention to detail in finishing and grooming</li>
+            <li>Works well under pressure in busy salon settings</li>
+            <li>Quick learner with a cooperative attitude</li>
+            <li>Maintains cleanliness and order at the workstation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="box">
+          <h2 class="section-title">Work Experience</h2>
+
+          <div class="experience-item">
+            <div class="job-title">
+              <span>Barber / Hair Stylist — Style Zone Saloon, Lahore</span>
+              <span class="subtle">2021 – 2022</span>
+            </div>
+            <div class="subtle">Opposite Emporium Mall, Lahore</div>
+            <ul>
+              <li>Performed hair cutting, beard styling, shaving, and basic grooming services.</li>
+              <li>Assisted senior stylists and handled customer needs in a professional manner.</li>
+              <li>Kept tools and salon work areas clean and ready for daily operations.</li>
+            </ul>
+          </div>
+
+          <div class="experience-item">
+            <div class="job-title">
+              <span>Barber / Hair Stylist — Local Saloon, Chakwal</span>
+              <span class="subtle">2022 – 2024</span>
+            </div>
+            <div class="subtle">Chakwal, Pakistan</div>
+            <ul>
+              <li>Provided regular haircuts, beard trims, and shaving services for local clients.</li>
+              <li>Built strong client relationships through polite communication and consistent work.</li>
+              <li>Maintained hygiene standards and improved speed, precision, and finishing quality.</li>
+            </ul>
+          </div>
+
+          <div class="experience-item">
+            <div class="job-title">
+              <span>Barber / Hair Stylist — Shani Finger Art Saloon, Islamabad</span>
+              <span class="subtle">2024 – 2025</span>
+            </div>
+            <div class="subtle">Islamabad, Pakistan</div>
+            <ul>
+              <li>Delivered modern fades, classic cuts, and detailed beard shaping for a fast-paced, high-footfall city salon.</li>
+              <li>Consulted directly with clients to understand style preferences and recommended looks suited to face shape and hair type.</li>
+              <li>Handled shaving, trimming, and facial grooming services with attention to hygiene and finishing detail.</li>
+              <li>Worked closely with the salon team during peak hours to manage bookings and maintain fast, reliable turnaround.</li>
+              <li>Sterilized and organized tools and workstation daily in line with salon hygiene protocols.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section two-col">
+        <div class="box">
+          <h2 class="section-title">Additional Information</h2>
+          <ul>
+            <li>Comfortable with customer consultation and understanding hairstyle preferences.</li>
+            <li>Can communicate with clients in English, Urdu, and Punjabi.</li>
+            <li>Ready for local or overseas salon opportunities.</li>
+            <li>References available on request.</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h2 class="section-title">References</h2>
+          <p>Available upon request.</p>
+        </div>
+      </div>
+
+      <div class="footer-note">Professional CV format — barber profile tailored for salon jobs and overseas opportunities.</div>
+    </section>
+  </main>
+</body>
+</html>
